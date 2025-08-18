@@ -1,8 +1,13 @@
-﻿namespace CarInfoApp.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CarInfoApp.Models
 {
     public class Make
     {
-        public int Make_ID { get; set; }
-        public string Make_Name { get; set; }
+        [JsonPropertyName("Make_ID")]
+        public int MakeId { get; set; }
+
+        [JsonPropertyName("Make_Name")]
+        public string MakeName { get; set; }
     }
 }

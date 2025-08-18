@@ -1,7 +1,11 @@
+
+using CarInfoApp.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<CarService>();
 
 var app = builder.Build();
 

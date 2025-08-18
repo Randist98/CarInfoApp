@@ -1,8 +1,13 @@
-﻿namespace CarInfoApp.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CarInfoApp.Models
 {
     public class CarModel
     {
-        public int Model_ID { get; set; }
-        public string Model_Name { get; set; }
+        [JsonPropertyName("Model_ID")]
+        public int ModelId { get; set; }
+
+        [JsonPropertyName("Model_Name")]
+        public string ModelName { get; set; }
     }
 }
