@@ -1,0 +1,63 @@
+﻿@model List<CarInfoApp.Models.Make>
+
+@{
+    ViewData["Title"] = "Car Info";
+}
+
+<h2>Select Make and Year</h2>
+
+<select id="makesDropdown">
+    <option value="">--Select Make--</option>
+    @foreach (var make in Model)
+    {
+        <option value="@make.MakeId">@make.MakeName</option>
+    }
+</select>
+
+<input type="number" id="yearInput" placeholder="Enter Year" />
+
+<button id="showDataBtn">Show Vehicle Types & Models</button>
+
+<h3>Vehicle Types:</h3>
+<ul id="vehicleTypesList"></ul>
+
+<h3>Models:</h3>
+<ul id="modelsList"></ul>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#showDataBtn').click(function(){
+            console.log('Button clicked');
+            var makeId = $('#makesDropdown').val();
+            var year = $('#yearInput').val();
+
+            if(!makeId || !year){
+                alert('Please select Make and enter Year');
+                return;
+            }
+
+           
+            $.getJSON('/Car/VehicleTypes?makeId=' + makeId, function(types){
+                $('#vehicleTypesList').empty();
+                types.forEach(function(type){
+                    
+                    $('#vehicleTypesList').append('<li>' + (type.vehicleTypeName || type.VehicleTypeName) + '</li>');
+                });
+            });
+
+    $.getJSON('/Car/Models?makeId=' + makeId + '&year=' + year, function(models){
+        console.log('Models received from server:', models); 
+        $('#modelsList').empty();
+        models.forEach(function(model){
+            var name = model.modelName || model.ModelName || model.Model_Name;
+
+            $('#modelsList').append('<li>' + name + '</li>');
+        });
+    });
+
+        });
+    });
+</script>
