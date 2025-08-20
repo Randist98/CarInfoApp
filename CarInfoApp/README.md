@@ -79,7 +79,3 @@ Replace <PORT> with the actual port number if different from defaults.
 
 The project is set up for easy containerization and local development.
 
----
-
-### License
-This project is licensed under the MIT License.
